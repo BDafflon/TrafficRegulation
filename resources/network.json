@@ -1,0 +1,17 @@
+{
+"network-name":"ligne-droite",
+"network":[
+	{	
+		"start":{"x":500,"y":500},
+		"speed-limit":90,
+		"end":{"x":500,"y":1000},
+		"nb-way":2
+	},
+	{
+		"start":{"x":500,"y":100},
+		"speed-limit":90,
+		"end":{"x":500,"y":1000},
+		"nb-way":2
+		}
+	]
+}
