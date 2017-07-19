@@ -2,7 +2,9 @@ package eu.fr.ucbl.disp.trafficregulation.sma.environment;
 
 import javax.vecmath.Point2d;
 
-import fr.utbm.set.safeplatoon.helper.util.DebugUtil;
+import eu.fr.ucbl.disp.trafficregulation.util.DebugUtil;
+
+ 
 
 @SuppressWarnings("restriction")
 /**

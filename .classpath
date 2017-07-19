@@ -9,6 +9,5 @@
 	<classpathentry kind="lib" path="jar/tinymas-kernel-6.7-20090505.033249-1.jar"/>
 	<classpathentry kind="lib" path="jar/vecmath-1.5.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/IntelligentControlHelper"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,8 +1,8 @@
 package eu.fr.ucbl.disp.trafficregulation;
 
 import eu.fr.ucbl.disp.trafficregulation.gui.GUI;
-import fr.utbm.set.safeplatoon.helper.util.DebugUtil;
-
+import eu.fr.ucbl.disp.trafficregulation.util.DebugUtil;
+ 
 public class Main {
 
 	public static void main(String [] args) {
