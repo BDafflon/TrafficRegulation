@@ -16,9 +16,10 @@ import org.arakhne.tinyMAS.core.SimulationClock;
 import org.arakhne.tinyMAS.situatedEnvironment.environment.AbstractSituatedEnvironment;
 import org.arakhne.tinyMAS.situatedEnvironment.environment.SituatedObject;
 
- 
+
 import eu.fr.ucbl.disp.trafficregulation.sma.agent.Animat;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.EnvironmentObject;
+import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.geometry.WayDelimiter;
 
 
 @SuppressWarnings("restriction")
@@ -29,15 +30,15 @@ public class WorldModel
 extends
 AbstractSituatedEnvironment<Animat, AnimatBody, SituatedObject, AnimatPerception, AnimatInfluence> {
 
- 
+
 
 	private ArrayList<AnimatBody> agents = new ArrayList<AnimatBody>();
 
 	private ArrayList<EnvironmentObject> objects = new ArrayList<EnvironmentObject>();
-	
+
 	private final double width;
 	private final double height;
-	 
+
 
 	/**
 	 * Constructeur avec paramètres
@@ -74,13 +75,13 @@ AbstractSituatedEnvironment<Animat, AnimatBody, SituatedObject, AnimatPerception
 	 * Ajoute un body passé en paramètre à l'arbre des Body (allBodyTree) avec une position aléatoire
 	 */
 	protected void onAgentBodyAdded(AnimatBody body) {
-		
+
 		double x, y;
-		x =   0;
+		x =  0;
 		y =  0;
 		body.setPosition(x, y);
 		this.agents.add(body);
- 
+
 	}
 
 	@Override
@@ -88,7 +89,7 @@ AbstractSituatedEnvironment<Animat, AnimatBody, SituatedObject, AnimatPerception
 	 * Supprime le body passé en paramètre de l'arbre des Body (allBodyTree)
 	 */
 	protected void onAgentBodyRemoved(AnimatBody body) {
- 
+
 	}
 
 	/**
@@ -113,15 +114,20 @@ AbstractSituatedEnvironment<Animat, AnimatBody, SituatedObject, AnimatPerception
 					}
 				}
 			}
-			
+
 			for (EnvironmentObject o : getObjects()) {
 				double x2 = o.getPosX();
 				double y2 = o.getPosY();
 				double distance = new Vector2d(x2-x1,y2-y1).length();
-				 
-						Vector2d v = new Vector2d(x2 ,y2);
+				if(distance<body.getViewFustrum().radius){
+					Vector2d v = new Vector2d(x2 ,y2);
+					if(o instanceof WayDelimiter){
+						WayDelimiter w = (WayDelimiter)o;
+						allPercepts.add(new AnimatPerception(v,w.getOrientation(),o.getPerceptionType()));
+					}else{
 						allPercepts.add(new AnimatPerception(v,o.getPerceptionType()));
-					 
+					}
+				}
 			}
 		}
 
@@ -162,11 +168,13 @@ AbstractSituatedEnvironment<Animat, AnimatBody, SituatedObject, AnimatPerception
 				double x1 = body1.getX();
 				double y1 = body1.getY();
 
-				if(move.x==0 && move.y==0){
-					body1.setPosition(0, 1);
-					move.set(0, 0);
-				}
-				if(body1.getLocation().distance(new Point2d(0, 0))>10){
+
+
+
+				// Trivial collision detection
+				/*
+				 * 
+				 * if(body1.getLocation().distance(new Point2d(0, 0))>10){
 					body1.setPosition(0, 1);
 					move.set(0, 0);
 				}
@@ -174,9 +182,6 @@ AbstractSituatedEnvironment<Animat, AnimatBody, SituatedObject, AnimatPerception
 					body1.setPosition(0, 1);
 					move.set(0, 0);
 				}
-				
-				// Trivial collision detection
-				/*
 				for (int index2 = index1 + 1; index2 < influenceList.size(); index2++) {
 					AnimatInfluence inf2 = influenceList.get(index2);
 					AnimatBody body2 = getAgentBody(inf2.getEmitter());
@@ -211,10 +216,10 @@ AbstractSituatedEnvironment<Animat, AnimatBody, SituatedObject, AnimatPerception
 
 			}
 			if(Double.isNaN(body.getLocation().x ) || Double.isNaN(body.getLocation().y ) )
-				 body.setPosition(0, 0);
+				body.setPosition(0, 0);
 		}
-		
-		
+
+
 
 		//System.out.println("World updating @ "+clock.getSimulationTime()); //$NON-NLS-1$
 

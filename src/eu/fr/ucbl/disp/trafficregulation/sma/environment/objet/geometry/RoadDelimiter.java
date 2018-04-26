@@ -33,6 +33,11 @@ public class RoadDelimiter extends EnvironmentObject {
 	}
 
 
+	public RoadDelimiter(Point2d point2d) {
+		// TODO Auto-generated constructor stub
+		this.setLocation(point2d);
+	}
+
 	@Override
 	/**
 	 * Set le type de perception à "BOMBE"

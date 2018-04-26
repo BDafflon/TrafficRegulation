@@ -19,7 +19,7 @@ public class Main {
 			gui.setVisible(false);
 		}
 
-		simu.init("network.json");
+		simu.init();
 	 
 		simu.start();
 

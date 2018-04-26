@@ -17,6 +17,7 @@ import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.PerceptionType;
 public class WayDelimiter extends EnvironmentObject {
 
 
+	private double orientation;
 	private final int radius = 200;
 	public int getRadius() {
 		return radius;
@@ -31,7 +32,18 @@ public class WayDelimiter extends EnvironmentObject {
 		this.setLocation(new Point2d(0,10));
 
 	}
+	
+	public WayDelimiter(Point2d p, double o ){
+		super();
+		this.setLocation(p);
+		this.setOrientation(o);
+	}
 
+
+	private void setOrientation(double o) {
+		// TODO Auto-generated method stub
+		this.orientation = o;
+	}
 
 	@Override
 	/**
@@ -50,6 +62,11 @@ public class WayDelimiter extends EnvironmentObject {
 	public void setPosition(Point2d p, int i) {
 		// TODO Auto-generated method stub
 		this.setLocation(p);
+	}
+
+	public double getOrientation() {
+		// TODO Auto-generated method stub
+		return this.orientation;
 	}
 
 

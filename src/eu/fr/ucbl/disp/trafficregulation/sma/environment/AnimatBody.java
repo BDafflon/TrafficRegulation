@@ -193,7 +193,7 @@ public class AnimatBody extends AbstractAgentBody<PerceptionBody, AnimatInfluenc
 	 * @param x
 	 * @param y
 	 */
-	void setPosition(double x, double y) {
+	public void setPosition(double x, double y) {
 		this.linearMove.set(0,0);
 		this.x = x;
 		this.y = y;

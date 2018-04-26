@@ -8,6 +8,6 @@ public enum PerceptionType {
 	BORDURE,
 	GOAL,
 	ROADLIMIT,
-	WAYLIMIT
+	WAYLIMIT, ROADWAYPOINT, VEHICLE
 	 
 }

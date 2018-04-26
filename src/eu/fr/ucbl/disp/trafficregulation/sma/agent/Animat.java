@@ -77,8 +77,8 @@ public abstract class Animat extends SituatedAgent<AnimatBody, SituatedObject, A
 	 */
 	public  AnimatBody createDefaultBody(SituatedEnvironment<? extends SituatedAgent<AnimatBody, SituatedObject, AnimatPerception, AnimatInfluence>, AnimatBody, SituatedObject, AnimatPerception, AnimatInfluence> in) {
 		AnimatBody body = new AnimatBody(this,  
-										 .6,	// max linear speed m/s
-										.2,						// max linear acceleration (m/s)/s
+										 50,	// max linear speed m/s
+										50,						// max linear acceleration (m/s)/s
 										Math.PI,				// max angular speed r/s
 										Math.PI);			// max angular acceleration (r/s)/s
 		

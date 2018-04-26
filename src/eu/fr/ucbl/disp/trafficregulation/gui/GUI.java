@@ -78,7 +78,7 @@ import org.arakhne.tinyMAS.core.KernelAdapter;
 import org.arakhne.tinyMAS.situatedEnvironment.body.AgentBody;
 
 import eu.fr.ucbl.disp.trafficregulation.Simulation;
- 
+
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.AnimatBody;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.AnimatPerception;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.AnimatViewPerception;
@@ -88,6 +88,9 @@ import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.EnvironmentObject
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.GoalEntity;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.PerceptionType;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.StandardEntity;
+import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.geometry.RoadDelimiter;
+import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.geometry.WayDelimiter;
+import eu.fr.ucbl.disp.trafficregulation.util.GeometryUtil;
 
 public class GUI extends JFrame {
 
@@ -130,7 +133,7 @@ public class GUI extends JFrame {
 		});
 		content.add(BorderLayout.SOUTH, closeBt);
 
-		this.world.setPreferredSize(new Dimension(700,700));
+		this.world.setPreferredSize(new Dimension(1400,1400));
 
 		// Configuration du kernel pour la GUI
 		kernel.addKernelListener(new KernelAdapter() {
@@ -153,7 +156,7 @@ public class GUI extends JFrame {
 		JScrollPane worldPanel = new JScrollPane(this.world);
 
 		content.add(BorderLayout.CENTER, worldPanel);
-		this.world.setPreferredSize(new Dimension(700,700));
+		this.world.setPreferredSize(new Dimension(1400,1400));
 
 		// ============ EAST
 		JPanel controlPanel = new JPanel(new GridLayout(3, 1));
@@ -319,9 +322,9 @@ public class GUI extends JFrame {
 
 		private Map<AgentIdentifier, EntityDescription> positions = null;
 
-		private int scaleFactor=15;
+		private int scaleFactor=1;
 
-		private int s=700/2;
+		private int s=1400/2;
 
 		public World() {
 			//
@@ -349,41 +352,53 @@ public class GUI extends JFrame {
 
 			for (EnvironmentObject environmentObject : grid) {
 
-
-				if (environmentObject instanceof StandardEntity) {
-					StandardEntity bomb = (StandardEntity) environmentObject;
+				if (environmentObject instanceof RoadDelimiter) {
+					RoadDelimiter rd = (RoadDelimiter) environmentObject;
 					g2d.setColor(Color.black);
 
+					int x = (int) (rd.getPosX()*scaleFactor);
+					int y = (int)( rd.getPosY()*scaleFactor);
 
-					int x = (int) (bomb.getPosX()*scaleFactor);
-					int y = (int)( bomb.getPosY()*scaleFactor);
-
-					((Graphics2D) g2d).fill(new Ellipse2D.Double(s-x-(scaleFactor*1)/2,s-y-(scaleFactor*1)/2,4,4));
-
+					((Graphics2D) g2d).fill(new Ellipse2D.Double(s+x-(scaleFactor*1)/2,s-y-(scaleFactor*1)/2,6,6));
 
 				}
-				if (environmentObject instanceof GoalEntity) {
-					GoalEntity bomb = (GoalEntity) environmentObject;
+				if (environmentObject instanceof WayDelimiter) {
+					WayDelimiter wd = (WayDelimiter) environmentObject;
 					g2d.setColor(Color.red);
-					//System.out.println("draw goal");
-
-					int x = (int) ( bomb.getPosX()*scaleFactor);
-					int y = (int) (bomb.getPosY()*scaleFactor);
-
-					((Graphics2D) g2d).fill(new Ellipse2D.Double(s-x-(scaleFactor*1)/2,s-y-(scaleFactor*1)/2,6,6));
 
 
+					int x = (int) (wd.getPosX()*scaleFactor);
+					int y = (int) (wd.getPosY()*scaleFactor);
 
+					Vector2d v = new Vector2d(0,50);
+					GeometryUtil.turnVector(v, Math.toRadians(wd.getOrientation()));
+
+
+					((Graphics2D) g2d).fill(new Ellipse2D.Double(s+x-(scaleFactor*1)/2,s-y-(scaleFactor*1)/2,6,6));
+
+					//((Graphics2D) g2d).drawLine(s+x-(scaleFactor*1)/2,s-y-(scaleFactor*1)/2,s+x-(scaleFactor*1)/2+(int)v.x,s-y-(scaleFactor*1)/2+(int)v.y);
+				}
+				if (environmentObject instanceof GoalEntity) {
+					GoalEntity g = (GoalEntity) environmentObject;
+					g2d.setColor(Color.blue);
+
+
+					int x = (int) (g.getPosX()*scaleFactor);
+					int y = (int) (g.getPosY()*scaleFactor);
+
+					Vector2d v = new Vector2d(0,50);
+				 
+
+
+					((Graphics2D) g2d).fill(new Ellipse2D.Double(s+x-(scaleFactor*1)/2,s-y-(scaleFactor*1)/2,6,6));
+
+					//((Graphics2D) g2d).drawLine(s+x-(scaleFactor*1)/2,s-y-(scaleFactor*1)/2,s+x-(scaleFactor*1)/2+(int)v.x,s-y-(scaleFactor*1)/2+(int)v.y);
 				}
 
 
 			}
 			//draw direction
-			g2d.setColor(Color.blue);
-			int x = -(int)(this.target.x*scaleFactor);
-			int y = (int)( this.target.y*scaleFactor);
-
-			((Graphics2D) g2d).fill(new Ellipse2D.Double(s-x-(scaleFactor*1)/2,s-y-(scaleFactor*1)/2,6,6));
+			 
 
 		}
 
@@ -399,16 +414,13 @@ public class GUI extends JFrame {
 				int x = (int) (body.getLocation().x * scaleFactor);
 				int y =  (int) (body.getLocation().y * scaleFactor);
 
-				((Graphics2D) g2d).fill(new Ellipse2D.Double(s-x-(scaleFactor*1)/2,s-y-(scaleFactor*1)/2,4,4));
+				((Graphics2D) g2d).fill(new Ellipse2D.Double(s+x-(scaleFactor*1)/2,s-y-(scaleFactor*1)/2,6,6));
+
 
 			}
 
 		}
 
-
-		private void drawAgent(Graphics2D g2d, int x, int y){
-
-		}
 
 
 		private void drawAgent(Graphics2D g2d, int x, int y, int dx, int dy, boolean leader,int radius, ArrayList<AnimatViewPerception> viewPerception, PerceptionType type, EntityDescription eDesc) {
