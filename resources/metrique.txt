@@ -1,0 +1,16 @@
+Interdistance Longitudinale avant : véhicule centré : distance entre le véhicule et son plus proche voisin dans un cone allant de -30 a 30°
+Interdistance longitudinale arriere :  véhicule centré : distance entre le véhicule et son plus proche voisin dans un cone allant de -150 a 150°
+Interdistance : véhicule centré : distance entre le véhicule et son plus proche voisin
+Vitesse : véhicule centré : vitesse courante du véhicule
+Acceleration : véhicule centré : acceleration courante du véhicule
+Oscillation laterale-10 : véhicule centré : nombre de changement d'orientation du véhicule par 10s
+Oscillation laterale-60 : véhicule centré : nombre de changement d'orientation par 60s
+Oscillation longitudinale-10 : véhicule centré : nombre de passage par 0 de la dérivé de la vitesse par 10s
+Oscillation longitudinale-60 : véhicule centré : nombre de passage par 0 de la dérivé de la vitesse par 60s
+
+Trafic-10 : route centré : nombre de véhicule sur la route par 10s
+Trafic-60 : route centré : nombre de véhicule sur la route par 60s
+Temps de trajet moyen : route centré 
+Vitesse moyenne : route centré
+Nombre de colision-10 : route centré : nombre de colisions sur la route par 10s
+Nombre de colision-60 : route centré : nombre de colision sur la route par 60s
