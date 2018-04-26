@@ -88,6 +88,7 @@ import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.EnvironmentObject
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.GoalEntity;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.PerceptionType;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.StandardEntity;
+import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.geometry.IDMDelimiter;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.geometry.RoadDelimiter;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.geometry.WayDelimiter;
 import eu.fr.ucbl.disp.trafficregulation.util.GeometryUtil;
@@ -365,6 +366,22 @@ public class GUI extends JFrame {
 				if (environmentObject instanceof WayDelimiter) {
 					WayDelimiter wd = (WayDelimiter) environmentObject;
 					g2d.setColor(Color.red);
+
+
+					int x = (int) (wd.getPosX()*scaleFactor);
+					int y = (int) (wd.getPosY()*scaleFactor);
+
+					Vector2d v = new Vector2d(0,50);
+					GeometryUtil.turnVector(v, Math.toRadians(wd.getOrientation()));
+
+
+					((Graphics2D) g2d).fill(new Ellipse2D.Double(s+x-(scaleFactor*1)/2,s-y-(scaleFactor*1)/2,6,6));
+
+					//((Graphics2D) g2d).drawLine(s+x-(scaleFactor*1)/2,s-y-(scaleFactor*1)/2,s+x-(scaleFactor*1)/2+(int)v.x,s-y-(scaleFactor*1)/2+(int)v.y);
+				}
+				if (environmentObject instanceof IDMDelimiter) {
+					IDMDelimiter wd = (IDMDelimiter) environmentObject;
+					g2d.setColor(Color.cyan);
 
 
 					int x = (int) (wd.getPosX()*scaleFactor);

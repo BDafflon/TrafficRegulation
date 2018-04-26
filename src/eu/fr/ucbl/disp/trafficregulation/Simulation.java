@@ -16,6 +16,7 @@ import eu.fr.ucbl.disp.trafficregulation.sma.agent.VehicleAgent;
 import eu.fr.ucbl.disp.trafficregulation.sma.agent.VehicleAgentIDM;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.WorldModel;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.GoalEntity;
+import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.geometry.IDMDelimiter;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.geometry.RoadDelimiter;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.geometry.WayDelimiter;
 import eu.fr.ucbl.disp.trafficregulation.util.AgentUtil;
@@ -96,6 +97,11 @@ Kernel<Animat, WorldModel, YellowPages, MessageTransportService> {
 			g.addObject(wd);
 		}
 		
+		for (int i = -1000; i < 1000 ; i=i+20){
+			IDMDelimiter wd = new IDMDelimiter( new Point2d(i,-17), Math.toRadians(0));
+			g.addObject(wd);
+		}
+		
 		/* Road Way 2 */
 
 		for (int i = -1000; i < 1000 ; i=i+5){
@@ -108,7 +114,10 @@ Kernel<Animat, WorldModel, YellowPages, MessageTransportService> {
 			g.addObject(wd);
 		}
 
-		
+		for (int i = -1000; i < 1000 ; i=i+20){
+			IDMDelimiter wd = new IDMDelimiter( new Point2d(i,17), Math.toRadians(-180));
+			g.addObject(wd);
+		}
 		
 	
 		Random r = new Random();
