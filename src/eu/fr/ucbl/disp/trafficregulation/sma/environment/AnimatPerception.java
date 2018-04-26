@@ -13,10 +13,17 @@ import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.PerceptionType;
 public class AnimatPerception extends Perception<Vector2d> {
 	
 	PerceptionType type;
+	
 	double orientation;
+	
+	double speed;
 	
 	public double getOrientation() {
 		return orientation;
+	}
+	
+	public double getSpeed() {
+		return speed;
 	}
 
 	public void setOrientation(double orientation) {
@@ -36,10 +43,11 @@ public class AnimatPerception extends Perception<Vector2d> {
 		this.type=type;
 	}
 	
-	public AnimatPerception(Vector2d percepts, Double orientation, PerceptionType type) {
+	public AnimatPerception(Vector2d percepts, double orientation, double speed, PerceptionType type) {
 		super(percepts);
 		this.type=type;
 		this.orientation = orientation;
+		this.speed=speed;
 	}
 	
 	

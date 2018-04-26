@@ -13,7 +13,7 @@ public class AnimatSteeringInfluence extends AnimatInfluence {
 	 * @param linearAcceleration
 	 * @param angularAcceleration
 	 */
-	AnimatSteeringInfluence(AgentIdentifier emitter, Vector2d linearAcceleration, double angularAcceleration) {
+	public AnimatSteeringInfluence(AgentIdentifier emitter, Vector2d linearAcceleration, double angularAcceleration) {
 		super(emitter, linearAcceleration, angularAcceleration);
 	}
 	

@@ -205,7 +205,7 @@ public class AnimatBody extends AbstractAgentBody<PerceptionBody, AnimatInfluenc
 	 * @param dy
 	 * @param simulationDuration
 	 */
-	void move(double dx, double dy, double simulationDuration) {
+	public void move(double dx, double dy, double simulationDuration) {
 		if (simulationDuration>0) {
 			this.linearMove.set(dx, dy);
 			double distance = this.linearMove.length();

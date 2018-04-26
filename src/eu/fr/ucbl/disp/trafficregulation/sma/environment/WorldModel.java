@@ -110,7 +110,7 @@ AbstractSituatedEnvironment<Animat, AnimatBody, SituatedObject, AnimatPerception
 					double distance = new Vector2d(x2-x1,y2-y1).length();
 					if(distance<body.getViewFustrum().radius){
 						Vector2d v = new Vector2d(x2 ,y2);
-						allPercepts.add(new AnimatPerception(v,b1.getType()));
+						allPercepts.add(new AnimatPerception(v,b1.getOrientation(), b1.getCurrentLinearSpeed(),b1.getType()));
 					}
 				}
 			}
@@ -123,9 +123,9 @@ AbstractSituatedEnvironment<Animat, AnimatBody, SituatedObject, AnimatPerception
 					Vector2d v = new Vector2d(x2 ,y2);
 					if(o instanceof WayDelimiter){
 						WayDelimiter w = (WayDelimiter)o;
-						allPercepts.add(new AnimatPerception(v,w.getOrientation(),o.getPerceptionType()));
+						allPercepts.add(new AnimatPerception(v,w.getOrientation(),0d,o.getPerceptionType()));
 					}else{
-						allPercepts.add(new AnimatPerception(v,o.getPerceptionType()));
+						allPercepts.add(new AnimatPerception(v,0d,0d,o.getPerceptionType()));
 					}
 				}
 			}

@@ -13,6 +13,7 @@ import org.jdom2.JDOMException;
 import eu.fr.ucbl.disp.trafficregulation.sma.agent.Animat;
 import eu.fr.ucbl.disp.trafficregulation.sma.agent.StandardAgent;
 import eu.fr.ucbl.disp.trafficregulation.sma.agent.VehicleAgent;
+import eu.fr.ucbl.disp.trafficregulation.sma.agent.VehicleAgentIDM;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.WorldModel;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.GoalEntity;
 import eu.fr.ucbl.disp.trafficregulation.sma.environment.objet.geometry.RoadDelimiter;
@@ -111,40 +112,33 @@ Kernel<Animat, WorldModel, YellowPages, MessageTransportService> {
 		
 	
 		Random r = new Random();
-		double rangeMin =0.001;
-		double rangeMax = 0.01;
-		for (int i = 0; i < 100; i++) {
-			
+		//double rangeMin =0.001;
+		//double rangeMax = 0.01;
 		
-			VehicleAgent d = new VehicleAgent();
+	
+		for (int i = 0; i < 10; i++) {
+			
+			double speed = (13) * r.nextDouble() +1d;
+			
+
+			//VehicleAgent d = new VehicleAgent();
+			VehicleAgentIDM d = new VehicleAgentIDM(speed);
 			this.addAgent(d) ;
 			d.getAgentBody().setPosition(-700,-20);
-			d.setTarget(towardWest);
+			//d.setTarget(towardWest);
 			d.getAgentBody().freeze();
 			d.getAgentBody().setOrientation(Math.toRadians(90));
-			double speed = (rangeMax - rangeMin) * r.nextDouble();
-			System.out.println(speed);
-			d.setMaxForce(speed);
+			//double speed = (rangeMax - rangeMin) * r.nextDouble();
+			//System.out.println(speed);
+			//d.setMaxForce(speed);
 			au.addAgent(d);
 		}
-		
-		for (int i = 0; i < 0; i++) {
-			VehicleAgent d = new VehicleAgent();
-			this.addAgent(d) ;
-			d.getAgentBody().setPosition(700,20);
-			d.setTarget(towardEst);
-			d.getAgentBody().freeze();
-			d.getAgentBody().setOrientation(Math.toRadians(-90));
-			double speed = (rangeMax - rangeMin) * r.nextDouble();
-			d.setMaxForce(speed);
-			au.addAgent(d);
-		}
+	
 		
 		this.setWaitingDuration(10);
 		
-		au.setTimer(1000);
+		au.setTimer(100);
 		ThreadUtil.execute(au);
-
 
 	}
 
